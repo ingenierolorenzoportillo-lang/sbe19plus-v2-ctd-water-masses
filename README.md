@@ -43,15 +43,68 @@ SBE 19plus V2 .hex + matching .xmlcon + optional station log (.csv/.xlsx)
 - Quality flags are aids to review, **not a certificate** that the measurements meet a formal oceanographic quality standard.
 - Original HEX/XMLCON and institutional datasets are intentionally excluded from this repository.
 
-## Installation
+## Installation / Instalación
 
-Python 3.10+ recommended. In the same environment used by Spyder or the terminal:
+**Requirement:** Python 3.10 or newer. Run these commands **from the root of the cloned/downloaded repository**, where `requirements.txt` is located. Install the packages in the **same Python environment** used to run the scripts (and Spyder, if applicable).
 
-```bash
-python -m pip install -r requirements.txt
+### Recommended: install all dependencies from requirements.txt
+
+**Windows (PowerShell or CMD):**
+
+```powershell
+py -m pip install --upgrade pip
+py -m pip install -r requirements.txt
 ```
 
-Dependencies include GSW (TEOS-10) and the Sea-Bird Scientific Python processing toolkit. For desktop file selectors run in an interactive environment.
+**Linux / macOS:**
+
+```bash
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+```
+
+### Alternative: one explicit command
+
+If you don't want to use `requirements.txt`, install the seven packages directly:
+
+```bash
+python -m pip install numpy pandas scipy matplotlib openpyxl gsw==3.6.20 seabirdscientific==2.7.10
+```
+
+Windows users can replace `python -m pip` with `py -m pip`, and macOS/Linux users may need `python3 -m pip`.
+
+### requirements.txt
+
+```text
+numpy
+pandas
+scipy
+matplotlib
+openpyxl
+gsw==3.6.20
+seabirdscientific==2.7.10
+```
+
+- `gsw==3.6.20` provides the Gibbs SeaWater / TEOS-10 calculations.
+- `seabirdscientific==2.7.10` pins the Sea-Bird processing package used by the recovered CTD workflow.
+- Package versions without `==` use the versions resolved by pip at installation time.
+
+### Check your installation / Verificación
+
+```bash
+python -m pip show numpy pandas scipy matplotlib openpyxl gsw seabirdscientific
+```
+
+To see which Python environment receives the packages:
+
+```bash
+python -m pip --version
+```
+
+**Spyder note:** if your installation in the terminal succeeds but an `ImportError` occurs in Spyder, check **Tools → Preferences → Python interpreter** and ensure Spyder uses the Python environment in which you installed the packages.
+
+**Security/reproducibility:** install only in your own environment; use a virtual environment when possible. This package list is taken from the project's current configuration, but installation and compatibility must still be verified on your machine. Desktop file selectors require an interactive graphical session.
+
 
 ## Step 1 — Process raw CTD data
 
