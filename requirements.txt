@@ -1,0 +1,7 @@
+numpy
+pandas
+scipy
+matplotlib
+openpyxl
+gsw==3.6.20
+seabirdscientific==2.7.10
